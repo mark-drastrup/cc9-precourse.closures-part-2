@@ -13,7 +13,7 @@ describe("gameGenerator", () => {
     const bound = 4;
     const game = gameGenerator(bound);
     const number = [];
-    for (let i = 0; i < bound; i++) {
+    for (let i = 0; i < bound + 1; i++) {
       if (game.guess(i)) {
         number.push(i);
       }
@@ -22,13 +22,37 @@ describe("gameGenerator", () => {
   });
 
   it("should have a reset method", () => {
-    // How do you test for this?
-    expect(false).toBeTruthy();
+    const game = gameGenerator(3);
+    expect(game.reset).toBeDefined();
+    expect(typeof(game.reset)).toBe('function');
   });
 
-  it("create your own test", () => {
-    expect(false).toBeTruthy();
+  it("should have a giveUp method", () => {
+    const game = gameGenerator(3);
+    expect(game.giveUp).toBeDefined();
+    expect(typeof(game.giveUp)).toBe('function');
   });
+
+  it("The giveUp function should set a new winning number", () => {
+    const game = gameGenerator(5);
+    expect(game.giveUp()).not.toEqual(answer)
+  })
+
+  it("should have a numberGuesses method", () => {
+    const game = gameGenerator(5);
+    expect(game.numberGuesses).toBeDefined();
+    expect(typeof(game.numberGuesses)).toBe('function');
+  });
+
+  it("should return the number of guesses, when the numberGuesses function is invoked", () => {
+    const game = gameGenerator(5);
+    let guesses = [];
+    for(let i = 0; i < 5; i++) {
+      game.guess(i);
+      guesses.push(i)
+    }
+    expect(game.numberGuesses()).toEqual(guesses.length);
+  }) 
 });
 
 describe("accountGenerator", () => {

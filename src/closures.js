@@ -20,8 +20,12 @@ function gameGenerator(n) {
     },
 
     reset() {
+      let oldAnswer = answer;
       this.guessesCount = 0;
       answer = randomInteger(n);
+      if(oldAnswer === answer) {
+        this.reset();
+      }
     },
 
     giveUp() {
