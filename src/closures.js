@@ -8,7 +8,37 @@ function randomInteger(n) {
   return Math.floor(Math.random() * (n + 1));
 }
 
-function gameGenerator() {}
+function gameGenerator(n) {
+  answer = randomInteger(n);
+  return {
+    guess(i) {
+      let reply = guessThisNumber(i);
+      return reply.status;
+    }
+  };
+}
+
+const upperBound = 5;
+let answer;
+
+function guessThisNumber(n) {
+  if (n > upperBound) {
+    return {
+      message: `Wrong. Please try a number between 0 and ${upperBound}.`,
+      status: false
+    };
+  } else if (n === answer) {
+    return {
+      message: "You win!",
+      status: true
+    };
+  }
+
+  return {
+    message: `Wrong. Please try a number between 0 and ${upperBound}.`,
+    status: false
+  };
+}
 
 function accountGenerator(initial) {
   let balance = initial;
