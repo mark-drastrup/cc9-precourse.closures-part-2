@@ -11,9 +11,27 @@ function randomInteger(n) {
 function gameGenerator(n) {
   answer = randomInteger(n);
   return {
+    guessesCount: 0,
+
     guess(i) {
+      this.guessesCount++;
       let reply = guessThisNumber(i);
       return reply.status;
+    },
+
+    reset() {
+      this.guessesCount = 0;
+      answer = randomInteger(n);
+    },
+
+    giveUp() {
+      let oldAnswer = answer;
+      this.reset();
+      return oldAnswer;
+    },
+
+    numberGuesses() {
+      return this.guessesCount;
     }
   };
 }
