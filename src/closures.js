@@ -30,7 +30,8 @@ function gameGenerator(n) {
 
     giveUp() {
       let oldAnswer = answer;
-      this.reset();
+      this.guessesCount = 0;
+      answer = randomInteger(n);
       return oldAnswer;
     },
 
