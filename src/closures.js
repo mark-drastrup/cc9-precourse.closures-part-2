@@ -68,14 +68,31 @@ function accountGenerator(initial) {
   return {
     withdraw: function(amount) {
       if (balance - amount >= 0) {
+        const approvedWithdrawal = {
+          type: "withdrawal",
+          amount: amount,
+          before: balance,
+          after: balance - amount,
+          status: "approved"
+        };
         balance = balance - amount;
-        return `Here’s your money: $${amount}`;
+        return approvedWithdrawal;
       }
-      return "Insufficient funds.";
+      const deniedWithdrawal = {
+        type: "withdrawal",
+        amount: amount,
+        before: balance,
+        after: balance,
+        status: "denied"
+      };
+      return deniedWithdrawal;
     },
     deposit: function(amount) {
       balance = balance + amount;
       return `Your balance is: $${balance}`;
+    },
+    getBalance: function() {
+      return balance;
     }
   };
 }

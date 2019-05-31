@@ -56,12 +56,34 @@ describe("gameGenerator", () => {
 });
 
 describe("accountGenerator", () => {
+
   it("should be there", () => {
     expect(accountGenerator).toBeDefined();
     expect(typeof accountGenerator).toBe("function");
   });
 
-  it("should have some tests", () => {
-    expect(false).toBeTruthy();
+  it("should have a method 'getBalance' that return the current balance", () => {
+    const account = accountGenerator(100);
+    let balance = account.getBalance();
+    account.withdraw(50);
+    expect(account.getBalance).toBeDefined();
+    expect(typeof(account.getBalance)).toBe('function');
+    expect(balance).not.toEqual(account.getBalance())
   });
+
+  it("should return a transaction object, when 'withdraw' is invoked", () => {
+    const account = accountGenerator(100);
+    const withdrawal = account.withdraw(50)
+    expect(typeof withdrawal).toBe("object");
+  });
+
+  it("should withdraw the input amount if the account has sufficient funds", () => {
+    const account = accountGenerator(100);
+    const deniedWithdrawal = account.withdraw(200);
+    const approvedWithdrawal = account.withdraw(50);
+
+    expect(deniedWithdrawal.status).toEqual("denied");
+    expect(approvedWithdrawal.status).toEqual("approved");
+    expect(account.getBalance()).toEqual(50);
+  })
 });
