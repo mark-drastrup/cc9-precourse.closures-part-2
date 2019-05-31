@@ -73,7 +73,8 @@ function accountGenerator(initial) {
           amount: amount,
           before: balance,
           after: balance - amount,
-          status: "approved"
+          status: "approved",
+          time: new Date()
         };
         balance = balance - amount;
         return approvedWithdrawal;
@@ -83,7 +84,8 @@ function accountGenerator(initial) {
         amount: amount,
         before: balance,
         after: balance,
-        status: "denied"
+        status: "denied",
+        time: new Date()
       };
       return deniedWithdrawal;
     },
@@ -93,7 +95,8 @@ function accountGenerator(initial) {
         amount: amount,
         before: balance,
         after: balance + amount,
-        status: "approved"
+        status: "approved",
+        time: new Date()
       };
       balance = balance + amount;
       return approvedDeposit;
