@@ -75,13 +75,13 @@ describe("accountGenerator", () => {
     const account = accountGenerator(100);
     const withdrawal = account.withdraw(50)
     expect(typeof withdrawal).toBe("object");
+    expect(withdrawal.time instanceof Date).toBe(true);
   });
 
   it("should withdraw the input amount if the account has sufficient funds", () => {
     const account = accountGenerator(100);
     const deniedWithdrawal = account.withdraw(200);
     const approvedWithdrawal = account.withdraw(50);
-
     expect(deniedWithdrawal.status).toEqual("denied");
     expect(approvedWithdrawal.status).toEqual("approved");
     expect(account.getBalance()).toEqual(50);
@@ -91,6 +91,7 @@ describe("accountGenerator", () => {
     const account = accountGenerator(100);
     const deposit = account.deposit(50)
     expect(typeof deposit).toBe("object");
+    expect(deposit.time instanceof Date).toBe(true);
   });
 
   it("should deposit the input amount", () => {
