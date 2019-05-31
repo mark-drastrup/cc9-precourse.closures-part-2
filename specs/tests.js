@@ -86,4 +86,20 @@ describe("accountGenerator", () => {
     expect(approvedWithdrawal.status).toEqual("approved");
     expect(account.getBalance()).toEqual(50);
   })
+
+  it("should return a transaction object, when 'deposit' is invoked", () => {
+    const account = accountGenerator(100);
+    const deposit = account.deposit(50)
+    expect(typeof deposit).toBe("object");
+  });
+
+  it("should deposit the input amount", () => {
+    const account = accountGenerator(100);
+    const originalBalance = account.getBalance();
+    account.deposit(50);
+    const newBalance = account.getBalance();
+
+    expect(originalBalance).toEqual(100);
+    expect(newBalance).toEqual(150)
+  })
 });

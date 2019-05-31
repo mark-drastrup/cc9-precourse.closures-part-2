@@ -88,8 +88,15 @@ function accountGenerator(initial) {
       return deniedWithdrawal;
     },
     deposit: function(amount) {
+      const approvedDeposit = {
+        type: "deposit",
+        amount: amount,
+        before: balance,
+        after: balance + amount,
+        status: "approved"
+      };
       balance = balance + amount;
-      return `Your balance is: $${balance}`;
+      return approvedDeposit;
     },
     getBalance: function() {
       return balance;
