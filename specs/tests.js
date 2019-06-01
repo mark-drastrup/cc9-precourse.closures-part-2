@@ -117,4 +117,23 @@ describe("accountGenerator", () => {
     expect(typeof history[0]).toBe("object");
     expect(history.length).toEqual(3);
   });
+
+  it("should have a method 'averageTransaction' that returns an object with the average deposit and withdrawal amounts", () => {
+    const account = accountGenerator(100);
+    account.deposit(145);
+    account.deposit(570);
+    account.deposit(300);
+    account.deposit(40);
+    account.withdraw(278)
+    account.withdraw(150);
+    account.withdraw(400);
+    account.withdraw(10000)
+
+    const average = account.averageTransaction()
+
+    expect(typeof account.averageTransaction).toBe("function");
+    expect(typeof average).toBe("object");
+    expect(average.deposit).toEqual(263.75);
+    expect(average.withdrawal).toEqual(276)
+  });
 });

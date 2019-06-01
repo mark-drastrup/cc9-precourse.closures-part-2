@@ -109,6 +109,21 @@ function accountGenerator(initial) {
     },
     transactionHistory: function(n) {
       return transactions.slice(transactions.length - n > 0 ? transactions.length - n : 0)
+    },
+    averageTransaction: function() {
+      let withdrawals = transactions.filter(transaction => transaction.type === "withdrawal" && transaction.status !== "denied");
+      let withdrawalTotal = withdrawals.reduce((acc, current) => {
+        return acc + current.amount;
+      }, 0) 
+      let withdrawalAverage = withdrawalTotal / withdrawals.length;
+
+      let deposits = transactions.filter(transaction => transaction.type === "deposit");
+      let depositTotal = deposits.reduce((acc, current) => {
+        return acc + current.amount;
+      }, 0)
+      let depositAverage = depositTotal / deposits.length;
+
+      return {deposit: depositAverage, withdrawal: withdrawalAverage}
     }
   };
 }
