@@ -56,6 +56,10 @@ describe("gameGenerator", () => {
 });
 
 describe("accountGenerator", () => {
+  let account;
+  beforeEach(function() {
+    account = accountGenerator(100);
+  });
 
   it("should be there", () => {
     expect(accountGenerator).toBeDefined();
@@ -63,7 +67,6 @@ describe("accountGenerator", () => {
   });
 
   it("should have a method 'getBalance' that return the current balance", () => {
-    const account = accountGenerator(100);
     let balance = account.getBalance();
     account.withdraw(50);
     expect(account.getBalance).toBeDefined();
@@ -72,14 +75,12 @@ describe("accountGenerator", () => {
   });
 
   it("should return a transaction object, when 'withdraw' is invoked", () => {
-    const account = accountGenerator(100);
     const withdrawal = account.withdraw(50)
     expect(typeof withdrawal).toBe("object");
     expect(withdrawal.time instanceof Date).toBe(true);
   });
 
   it("should withdraw the input amount if the account has sufficient funds", () => {
-    const account = accountGenerator(100);
     const deniedWithdrawal = account.withdraw(200);
     const approvedWithdrawal = account.withdraw(50);
     expect(deniedWithdrawal.status).toEqual("denied");
@@ -88,14 +89,12 @@ describe("accountGenerator", () => {
   })
 
   it("should return a transaction object, when 'deposit' is invoked", () => {
-    const account = accountGenerator(100);
     const deposit = account.deposit(50)
     expect(typeof deposit).toBe("object");
     expect(deposit.time instanceof Date).toBe(true);
   });
 
   it("should deposit the input amount", () => {
-    const account = accountGenerator(100);
     const originalBalance = account.getBalance();
     account.deposit(50);
     const newBalance = account.getBalance();
@@ -105,7 +104,6 @@ describe("accountGenerator", () => {
   })
 
   it("should have a method 'transactionHistory' that returns the last 'n' withdrawals and deposits", () => {
-    const account = accountGenerator(100);
     account.deposit(45);
     account.deposit(90);
     account.withdraw(100);
@@ -119,7 +117,6 @@ describe("accountGenerator", () => {
   });
 
   it("should have a method 'averageTransaction' that returns an object with the average deposit and withdrawal amounts", () => {
-    const account = accountGenerator(100);
     account.deposit(145);
     account.deposit(570);
     account.deposit(300);
