@@ -47,6 +47,7 @@ function gameGenerator(n) {
 
     giveUp() {
       let oldAnswer = this.answer;
+      this.guessesCount = 0;
       this.answer = randomInteger(n)
       return oldAnswer;
     },
