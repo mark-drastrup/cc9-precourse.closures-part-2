@@ -103,4 +103,18 @@ describe("accountGenerator", () => {
     expect(originalBalance).toEqual(100);
     expect(newBalance).toEqual(150)
   })
+
+  it("should have a method 'transactionHistory' that returns the last 'n' withdrawals and deposits", () => {
+    const account = accountGenerator(100);
+    account.deposit(45);
+    account.deposit(90);
+    account.withdraw(100);
+    account.withdraw(1000);
+    const history = account.transactionHistory(3);
+
+    expect(typeof account.transactionHistory).toBe("function");
+    expect(Array.isArray(history)).toBe(true);
+    expect(typeof history[0]).toBe("object");
+    expect(history.length).toEqual(3);
+  });
 });

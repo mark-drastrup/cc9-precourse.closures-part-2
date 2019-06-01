@@ -64,7 +64,7 @@ function guessThisNumber(n) {
 
 function accountGenerator(initial) {
   let balance = initial;
-
+  let transactions = [];
   return {
     withdraw: function(amount) {
       if (balance - amount >= 0) {
@@ -77,6 +77,7 @@ function accountGenerator(initial) {
           time: new Date()
         };
         balance = balance - amount;
+        transactions.push(approvedWithdrawal);
         return approvedWithdrawal;
       }
       const deniedWithdrawal = {
@@ -87,6 +88,7 @@ function accountGenerator(initial) {
         status: "denied",
         time: new Date()
       };
+      transactions.push(deniedWithdrawal);
       return deniedWithdrawal;
     },
     deposit: function(amount) {
@@ -99,10 +101,14 @@ function accountGenerator(initial) {
         time: new Date()
       };
       balance = balance + amount;
+      transactions.push(approvedDeposit);
       return approvedDeposit;
     },
     getBalance: function() {
       return balance;
+    },
+    transactionHistory: function(n) {
+      return transactions.slice(transactions.length - n > 0 ? transactions.length - n : 0)
     }
   };
 }
