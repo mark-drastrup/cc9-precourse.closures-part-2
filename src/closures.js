@@ -9,19 +9,18 @@ function randomInteger(n) {
 }
 
 function gameGenerator(n) {
+  let guessesCount = 0;
+  let answer = randomInteger(n);
   return {
-    guessesCount: 0,
-    answer: randomInteger(n),
-
     guess(n) {
-      this.guessesCount++;
+      guessesCount++;
       let reply;
       if (n > upperBound) {
         reply = {
           message: `Wrong. Please try a number between 0 and ${upperBound}.`,
           status: false
         };
-      } else if (n === this.answer) {
+      } else if (n === answer) {
         reply = {
           message: "You win!",
           status: true
@@ -37,26 +36,26 @@ function gameGenerator(n) {
     },
 
     reset() {
-      let oldAnswer = this.answer;
-      this.guessesCount = 0;
-      this.answer = randomInteger(n);
-      if(oldAnswer === this.answer) {
+      let oldAnswer = answer;
+      guessesCount = 0;
+      answer = randomInteger(n);
+      if(oldAnswer === answer) {
         this.reset();
       }
     },
 
     giveUp() {
-      let oldAnswer = this.answer;
-      this.guessesCount = 0;
-      this.answer = randomInteger(n)
-      if(oldAnswer === this.answer) {
-        this.answer = randomInteger(n)
+      let oldAnswer = answer;
+      guessesCount = 0;
+      answer = randomInteger(n)
+      if(oldAnswer === answer) {
+        answer = randomInteger(n)
       }
       return oldAnswer;
     },
 
     numberGuesses() {
-      return this.guessesCount;
+      return guessesCount;
     }
   };
 }

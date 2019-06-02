@@ -36,6 +36,7 @@ describe("gameGenerator", () => {
   });
 
   it("The giveUp function should set a new winning number", () => {
+    debugger;
     expect(game.giveUp()).not.toEqual(game.answer)
   })
 
