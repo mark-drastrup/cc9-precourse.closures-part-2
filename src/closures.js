@@ -20,19 +20,20 @@ function gameGenerator(n) {
           message: `Wrong. Please try a number between 0 and ${upperBound}.`,
           status: false
         };
+        return reply.status;
       } else if (i === answer) {
         reply = {
           message: "You win!",
           status: true
         };
+        return reply.status;
       } else {
         reply = {
           message: `Wrong. Please try a number between 0 and ${upperBound}.`,
           status: false
         };
+        return reply.status;
       }
-    
-      return reply.status;
     },
 
     reset() {
