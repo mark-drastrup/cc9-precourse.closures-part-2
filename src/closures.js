@@ -11,11 +11,11 @@ function randomInteger(n) {
 function gameGenerator(n) {
   const upperBound = n;
   let guessesCount = 0;
+  let reply;
   let answer = randomInteger(n);
   return {
     guess(i) {
       guessesCount++;
-      let reply;
       if (i > upperBound) {
         reply = {
           message: `Wrong. Please try a number between 0 and ${upperBound}.`,
