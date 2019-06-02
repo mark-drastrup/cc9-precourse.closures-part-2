@@ -9,6 +9,7 @@ function randomInteger(n) {
 }
 
 function gameGenerator(n) {
+  const upperBound = n;
   let guessesCount = 0;
   let answer = randomInteger(n);
   return {
@@ -60,8 +61,6 @@ function gameGenerator(n) {
     }
   };
 }
-
-const upperBound = 5;
 
 function accountGenerator(initial) {
   let balance = initial;
