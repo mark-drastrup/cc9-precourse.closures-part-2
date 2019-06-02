@@ -12,15 +12,15 @@ function gameGenerator(n) {
   let guessesCount = 0;
   let answer = randomInteger(n);
   return {
-    guess(n) {
+    guess(i) {
       guessesCount++;
       let reply;
-      if (n > upperBound) {
+      if (i > upperBound) {
         reply = {
           message: `Wrong. Please try a number between 0 and ${upperBound}.`,
           status: false
         };
-      } else if (n === answer) {
+      } else if (i === answer) {
         reply = {
           message: "You win!",
           status: true
