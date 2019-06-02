@@ -8,37 +8,33 @@ function randomInteger(n) {
   return Math.floor(Math.random() * (n + 1));
 }
 
-function guessThisNumber(n) {
-  if (n > upperBound) {
-    return {
-      message: `Wrong. Please try a number between 0 and ${upperBound}.`,
-      status: false
-    };
-  } else if (n === randomInteger(upperBound)) {
-    return {
-      message: "You win!",
-      status: true
-    };
-  }
-
-  return {
-    message: `Wrong. Please try a number between 0 and ${upperBound}.`,
-    status: false
-  };
-}
-
-let upperBound = 5;
-
 function gameGenerator(n) {
-  upperBound = n;
-  let reply;
+  const upperBound = n;
   let guessesCount = 0;
+  let reply;
   let answer = randomInteger(n);
   return {
     guess(i) {
       guessesCount++;
-      reply = guessThisNumber(i);
-      return reply.status;
+      if (i > upperBound) {
+        reply = {
+          message: `Wrong. Please try a number between 0 and ${upperBound}.`,
+          status: false
+        };
+        return reply.status;
+      } else if (i === answer) {
+        reply = {
+          message: "You win!",
+          status: true
+        };
+        return reply.status;
+      } else {
+        reply = {
+          message: `Wrong. Please try a number between 0 and ${upperBound}.`,
+          status: false
+        };
+        return reply.status;
+      }
     },
 
     reset() {
