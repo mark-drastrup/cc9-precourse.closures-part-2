@@ -11,30 +11,13 @@ function randomInteger(n) {
 function gameGenerator(n) {
   const upperBound = n;
   let guessesCount = 0;
-  let reply;
   let answer = randomInteger(n);
   return {
     guess(i) {
       guessesCount++;
-      if (i > upperBound) {
-        reply = {
-          message: `Wrong. Please try a number between 0 and ${upperBound}.`,
-          status: false
-        };
-        return reply.status;
-      } else if (i === answer) {
-        reply = {
-          message: "You win!",
-          status: true
-        };
-        return reply.status;
-      } else {
-        reply = {
-          message: `Wrong. Please try a number between 0 and ${upperBound}.`,
-          status: false
-        };
-        return reply.status;
-      }
+      if (i > upperBound) return false;
+      else if (i === answer) return true;
+      else return false
     },
 
     reset() {
